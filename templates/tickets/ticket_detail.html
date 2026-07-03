@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Ticket Details{% endblock %}
+
+{% block content %}
+
+<div class="ticket-card">
+
+    <h1>{{ ticket.title }}</h1>
+
+    <p>{{ ticket.description }}</p>
+
+    <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+</div>
+
+<h2>Comments</h2>
+
+<div class="ticket-card">
+
+{% for comment in ticket.comments.all %}
+    <p><strong>{{ comment.user.username }}</strong><br>
+    {{ comment.comment }}</p>
+    <hr>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+</div>
+
+<h2>Add Comment</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Add Comment</button>
+</form>
+
+<br>
+
+<a href="/">← Back to Tickets</a>
+
+{% endblock %}

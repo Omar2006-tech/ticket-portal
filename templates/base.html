@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ticket Portal{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        🎫 Ticket Portal
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/create/">Create Ticket</a>
+        <a href="/admin/">Admin</a>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer>
+    <p>© 2026 Ticket Portal | Developed by Blessing Chioma</p>
+</footer>
+
+</body>
+</html>
