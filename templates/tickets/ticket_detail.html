@@ -4,41 +4,84 @@
 
 {% block content %}
 
-<div class="ticket-card">
+<div class="page-header">
 
-    <h1>{{ ticket.title }}</h1>
+    <div>
+        <h1>{{ ticket.title }}</h1>
+        <p>Support Ticket Details</p>
+    </div>
 
-    <p>{{ ticket.description }}</p>
-
-    <p><strong>Status:</strong> {{ ticket.status }}</p>
-
-</div>
-
-<h2>Comments</h2>
-
-<div class="ticket-card">
-
-{% for comment in ticket.comments.all %}
-    <p><strong>{{ comment.user.username }}</strong><br>
-    {{ comment.comment }}</p>
-    <hr>
-{% empty %}
-    <p>No comments yet.</p>
-{% endfor %}
+    <span class="status-badge">
+        {{ ticket.status }}
+    </span>
 
 </div>
 
-<h2>Add Comment</h2>
+<div class="ticket-card">
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <h3>Description</h3>
 
-    <button type="submit">Add Comment</button>
-</form>
+    <p class="ticket-description">
+        {{ ticket.description }}
+    </p>
 
-<br>
+</div>
 
-<a href="/">← Back to Tickets</a>
+<div class="ticket-card">
 
+    <h2>Comments</h2>
+
+    {% for comment in ticket.comments.all %}
+
+        <div class="comment-box">
+
+            <strong>{{ comment.user.username }}</strong>
+
+            <p>{{ comment.comment }}</p>
+
+        </div>
+
+    {% empty %}
+
+        <p>No comments yet.</p>
+
+    {% endfor %}
+
+</div>
+
+<div class="form-container">
+
+    <h2>Add Comment</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="submit-btn">
+
+            Add Comment
+
+        </button>
+
+    </form>
+
+</div>
+
+<div class="action-buttons">
+
+    <a href="{% url 'edit_ticket' ticket.id %}" class="edit-link">
+        ✏️ Edit Ticket
+    </a>
+
+    <a href="{% url 'delete_ticket' ticket.id %}" class="delete-link">
+        🗑️ Delete Ticket
+    </a>
+
+    <a href="/" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+</div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Ticket{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>Delete Ticket</h1>
+
+    <p>
+        Are you sure you want to permanently delete
+        <strong>"{{ ticket.title }}"</strong>?
+    </p>
+
+    <p style="color:#dc2626;">
+        This action cannot be undone.
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button type="submit" class="delete-btn">
+            Delete Ticket
+        </button>
+
+        <a href="{% url 'ticket_detail' ticket.id %}" class="back-link">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

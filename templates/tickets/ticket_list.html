@@ -1,34 +1,80 @@
 {% extends 'base.html' %}
 
-{% block title %}All Tickets{% endblock %}
+{% block title %}Ticket Dashboard{% endblock %}
 
 {% block content %}
 
-<h1>All Tickets</h1>
+<div class="page-header">
 
-<a href="/create/">
-    <button>Create New Ticket</button>
-</a>
+    <div>
+        <h1>Ticket Dashboard</h1>
+        <p>Manage and monitor all support requests.</p>
+    </div>
 
-<br><br>
+    <a href="/create/" class="create-btn">
+        + New Ticket
+    </a>
+
+</div>
+
+<div class="dashboard-cards">
+
+    <div class="dashboard-card total-card">
+        <h2>{{ total_tickets }}</h2>
+        <p>Total Tickets</p>
+    </div>
+
+    <div class="dashboard-card open-card">
+        <h2>{{ open_tickets }}</h2>
+        <p>Open Tickets</p>
+    </div>
+
+    <div class="dashboard-card progress-card">
+        <h2>{{ in_progress_tickets }}</h2>
+        <p>In Progress</p>
+    </div>
+
+    <div class="dashboard-card resolved-card">
+        <h2>{{ resolved_tickets }}</h2>
+        <p>Resolved</p>
+    </div>
+
+    <div class="dashboard-card closed-card">
+        <h2>{{ closed_tickets }}</h2>
+        <p>Closed</p>
+    </div>
+
+</div>
 
 {% for ticket in tickets %}
+
 <div class="ticket-card">
 
-    <h3>
-        <a href="{% url 'ticket_detail' ticket.id %}">
-            {{ ticket.title }}
-        </a>
-    </h3>
+    <div class="ticket-header">
 
-    <p>{{ ticket.description }}</p>
+        <h3>
+            <a href="{% url 'ticket_detail' ticket.id %}">
+                {{ ticket.title }}
+            </a>
+        </h3>
 
-    <p>Status: {{ ticket.status }}</p>
+        <span class="status-badge status-{{ ticket.status }}">
+            {{ ticket.get_status_display }}
+        </span>
+    </div>
+
+    <p class="ticket-description">
+        {{ ticket.description }}
+    </p>
 
 </div>
 
 {% empty %}
-<p>No tickets available.</p>
+
+<div class="ticket-card">
+    <p>No support tickets have been created yet.</p>
+</div>
+
 {% endfor %}
 
 {% endblock %}

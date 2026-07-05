@@ -10,26 +10,46 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="logo">
-        🎫 Ticket Portal
-    </div>
+<div class="app-container">
 
-    <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/create/">Create Ticket</a>
-        <a href="/admin/">Admin</a>
-    </div>
-</nav>
+    <!-- Sidebar -->
+    <aside class="sidebar">
 
-<div class="container">
-    {% block content %}
-    {% endblock %}
+        <div class="brand">
+            <h2>BGL Help Desk</h2>
+            <p>Support Ticket Management System</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="/">🏠 Dashboard</a>
+            <a href="/">🎫 Tickets</a>
+            <a href="/create/">➕ Create Ticket</a>
+            <a href="/admin/">⚙️ System Admin</a>
+        </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <h2>Welcome to BGL Help Desk</h2>
+
+            <div class="user-area">
+                👤 System Admin
+            </div>
+        </header>
+
+        <section class="content-area">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+    </main>
+
 </div>
-
-<footer>
-    <p>© 2026 Ticket Portal | Developed by Blessing Chioma</p>
-</footer>
 
 </body>
 </html>
